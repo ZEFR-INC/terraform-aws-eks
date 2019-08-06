@@ -2,7 +2,7 @@
 
 resource "aws_autoscaling_group" "workers_launch_template" {
   count                   = "${var.worker_group_launch_template_count}"
-  name_prefix             = "${aws_eks_cluster.this.name}-${lookup(var.worker_groups_launch_template[count.index], "name", count.index)}"
+  name_prefix             = "${lookup(var.worker_groups_launch_template[count.index], "name", count.index)}"
   desired_capacity        = "${lookup(var.worker_groups_launch_template[count.index], "asg_desired_capacity", local.workers_group_defaults["asg_desired_capacity"])}"
   max_size                = "${lookup(var.worker_groups_launch_template[count.index], "asg_max_size", local.workers_group_defaults["asg_max_size"])}"
   min_size                = "${lookup(var.worker_groups_launch_template[count.index], "asg_min_size", local.workers_group_defaults["asg_min_size"])}"
@@ -22,7 +22,7 @@ resource "aws_autoscaling_group" "workers_launch_template" {
 
   tags = ["${concat(
     list(
-      map("key", "Name", "value", "${aws_eks_cluster.this.name}-${lookup(var.worker_groups_launch_template[count.index], "name", count.index)}-eks_asg", "propagate_at_launch", true),
+      map("key", "Name", "value", "${lookup(var.worker_groups_launch_template[count.index], "name", count.index)}", "propagate_at_launch", true),
       map("key", "kubernetes.io/cluster/${aws_eks_cluster.this.name}", "value", "owned", "propagate_at_launch", true),
       map("key", "k8s.io/cluster-autoscaler/${lookup(var.worker_groups_launch_template[count.index], "autoscaling_enabled", local.workers_group_defaults["autoscaling_enabled"]) == 1 ? "enabled" : "disabled"  }", "value", "true", "propagate_at_launch", false),
       map("key", "k8s.io/cluster-autoscaler/${aws_eks_cluster.this.name}", "value", "", "propagate_at_launch", false),
