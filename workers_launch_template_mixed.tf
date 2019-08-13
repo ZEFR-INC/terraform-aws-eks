@@ -53,9 +53,9 @@ resource "aws_autoscaling_group" "workers_launch_template_mixed" {
     list(
       map("key", "Name", "value", "${lookup(var.worker_groups_launch_template_mixed[count.index], "name", count.index)}", "propagate_at_launch", true),
       map("key", "kubernetes.io/cluster/${aws_eks_cluster.this.name}", "value", "owned", "propagate_at_launch", true),
-      map("key", "k8s.io/cluster-autoscaler/${lookup(var.worker_groups_launch_template_mixed[count.index], "autoscaling_enabled", local.workers_group_defaults["autoscaling_enabled"]) == 1 ? "enabled" : "disabled"  }", "value", "true", "propagate_at_launch", false),
-      map("key", "k8s.io/cluster-autoscaler/${aws_eks_cluster.this.name}", "value", "", "propagate_at_launch", false),
-      map("key", "k8s.io/cluster-autoscaler/node-template/resources/ephemeral-storage", "value", "${lookup(var.worker_groups_launch_template_mixed[count.index], "root_volume_size", local.workers_group_defaults["root_volume_size"])}Gi", "propagate_at_launch", false)
+      map("key", "k8s.io/cluster-autoscaler/${lookup(var.worker_groups_launch_template_mixed[count.index], "autoscaling_enabled", local.workers_group_defaults["autoscaling_enabled"]) == 1 ? "enabled" : "disabled"  }", "value", "true", "propagate_at_launch", true),
+      map("key", "k8s.io/cluster-autoscaler/${aws_eks_cluster.this.name}", "value", "", "propagate_at_launch", true),
+      map("key", "k8s.io/cluster-autoscaler/node-template/resources/ephemeral-storage", "value", "${lookup(var.worker_groups_launch_template_mixed[count.index], "root_volume_size", local.workers_group_defaults["root_volume_size"])}Gi", "propagate_at_launch", true)
     ),
     local.asg_tags,
     var.worker_group_tags[contains(keys(var.worker_group_tags), "${lookup(var.worker_groups_launch_template_mixed[count.index], "name", count.index)}") ? "${lookup(var.worker_groups_launch_template_mixed[count.index], "name", count.index)}" : "default"])
