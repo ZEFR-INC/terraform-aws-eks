@@ -19,10 +19,10 @@ locals {
     asg_max_size                  = "3"                             # Maximum worker capacity in the autoscaling group.
     asg_min_size                  = "1"                             # Minimum worker capacity in the autoscaling group.
     asg_force_delete              = false                           # Enable forced deletion for the autoscaling group.
-    instance_type                 = "m4.large"                      # Size of the workers instances.
+    instance_type                 = "m4.2xlarge"                      # Size of the workers instances.
     spot_price                    = ""                              # Cost of spot instance.
     placement_tenancy             = ""                              # The tenancy of the instance. Valid values are "default" or "dedicated".
-    root_volume_size              = "100"                           # root volume size of workers instances.
+    root_volume_size              = "120"                           # root volume size of workers instances.
     root_volume_type              = "gp2"                           # root volume type of workers instances, can be 'standard', 'gp2', or 'io1'
     root_iops                     = "0"                             # The amount of provisioned IOPS. This must be set with a volume_type of "io1".
     key_name                      = ""                              # The key name that should be used for the instances in the autoscaling group
@@ -34,7 +34,7 @@ locals {
     public_ip                     = false                           # Associate a public ip address with a worker
     kubelet_extra_args            = ""                              # This string is passed directly to kubelet if set. Useful for adding labels or taints.
     subnets                       = "${join(",", var.subnets)}"     # A comma delimited string of subnets to place the worker nodes in. i.e. subnet-123,subnet-456,subnet-789
-    autoscaling_enabled           = false                           # Sets whether policy and matching tags will be added to allow autoscaling.
+    autoscaling_enabled           = true                           # Sets whether policy and matching tags will be added to allow autoscaling.
     additional_security_group_ids = ""                              # A comma delimited list of additional security group ids to include in worker launch config
     protect_from_scale_in         = false                           # Prevent AWS from scaling in, so that cluster-autoscaler is solely responsible.
     iam_instance_profile_name     = ""                              # A custom IAM instance profile name. Used when manage_worker_iam_resources is set to false. Incompatible with iam_role_id.
@@ -55,10 +55,10 @@ locals {
     eni_delete                        = true                                          # Delete the ENI on termination (if set to false you will have to manually delete before destroying)
 
     # Settings for launch templates with mixed instances policy
-    override_instance_type_1                 = "m5.large"     # Override instance type 1 for mixed instances policy
-    override_instance_type_2                 = "c5.large"     # Override instance type 2 for mixed instances policy
-    override_instance_type_3                 = "t3.large"     # Override instance type 3 for mixed instances policy
-    override_instance_type_4                 = "r5.large"     # Override instance type 4 for mixed instances policy
+    override_instance_type_1                 = ""     # Override instance type 1 for mixed instances policy
+    override_instance_type_2                 = ""     # Override instance type 2 for mixed instances policy
+    override_instance_type_3                 = ""     # Override instance type 3 for mixed instances policy
+    override_instance_type_4                 = ""     # Override instance type 4 for mixed instances policy
     on_demand_allocation_strategy            = "prioritized"  # Strategy to use when launching on-demand instances. Valid values: prioritized.
     on_demand_base_capacity                  = "0"            # Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances
     on_demand_percentage_above_base_capacity = "0"            # Percentage split between on-demand and Spot instances above the base on-demand capacity
