@@ -19,7 +19,7 @@ locals {
     asg_max_size                  = "3"                             # Maximum worker capacity in the autoscaling group.
     asg_min_size                  = "1"                             # Minimum worker capacity in the autoscaling group.
     asg_force_delete              = false                           # Enable forced deletion for the autoscaling group.
-    instance_type                 = "m4.2xlarge"                      # Size of the workers instances.
+    instance_type                 = "m5.2xlarge"                      # Size of the workers instances.
     spot_price                    = ""                              # Cost of spot instance.
     placement_tenancy             = ""                              # The tenancy of the instance. Valid values are "default" or "dedicated".
     root_volume_size              = "120"                           # root volume size of workers instances.
