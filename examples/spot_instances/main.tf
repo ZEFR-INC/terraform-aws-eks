@@ -50,7 +50,9 @@ module "eks" {
       override_instance_type_2 = "c5.large"
       override_instance_type_3 = "t3.large"
       override_instance_type_4 = "r5.large"
-      spot_instance_pools      = 4
+      override_instance_type_5 = "t3.nano"
+      override_instance_type_6 = "t3.micro"
+      spot_instance_pools      = 6
       asg_max_size             = 5
       asg_desired_capacity     = 5
       kubelet_extra_args       = "--node-labels=kubernetes.io/lifecycle=spot"

@@ -59,6 +59,8 @@ locals {
     override_instance_type_2                 = ""     # Override instance type 2 for mixed instances policy
     override_instance_type_3                 = ""     # Override instance type 3 for mixed instances policy
     override_instance_type_4                 = ""     # Override instance type 4 for mixed instances policy
+    override_instance_type_5                 = ""     # Override instance type 4 for mixed instances policy
+    override_instance_type_6                 = ""     # Override instance type 4 for mixed instances policy
     on_demand_allocation_strategy            = "prioritized"  # Strategy to use when launching on-demand instances. Valid values: prioritized.
     on_demand_base_capacity                  = "0"            # Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances
     on_demand_percentage_above_base_capacity = "0"            # Percentage split between on-demand and Spot instances above the base on-demand capacity

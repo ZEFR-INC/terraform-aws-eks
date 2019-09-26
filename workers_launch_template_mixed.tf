@@ -46,6 +46,13 @@ resource "aws_autoscaling_group" "workers_launch_template_mixed" {
       override {
         instance_type = "${lookup(var.worker_groups_launch_template_mixed[count.index], "override_instance_type_4", local.workers_group_defaults["override_instance_type_4"])}"
       }
+      override {
+        instance_type = "${lookup(var.worker_groups_launch_template_mixed[count.index], "override_instance_type_5", local.workers_group_defaults["override_instance_type_4"])}"
+      }
+
+      override {
+        instance_type = "${lookup(var.worker_groups_launch_template_mixed[count.index], "override_instance_type_6", local.workers_group_defaults["override_instance_type_4"])}"
+      }
     }
   }
 
