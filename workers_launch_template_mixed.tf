@@ -21,7 +21,7 @@ resource "aws_autoscaling_group" "workers_launch_template_mixed" {
       on_demand_base_capacity                  = "${lookup(var.worker_groups_launch_template_mixed[count.index], "on_demand_base_capacity", local.workers_group_defaults["on_demand_base_capacity"])}"
       on_demand_percentage_above_base_capacity = "${lookup(var.worker_groups_launch_template_mixed[count.index], "on_demand_percentage_above_base_capacity", local.workers_group_defaults["on_demand_percentage_above_base_capacity"])}"
       spot_allocation_strategy                 = "${lookup(var.worker_groups_launch_template_mixed[count.index], "spot_allocation_strategy", local.workers_group_defaults["spot_allocation_strategy"])}"
-      spot_instance_pools                      = "${lookup(var.worker_groups_launch_template_mixed[count.index], "spot_instance_pools", local.workers_group_defaults["spot_instance_pools"])}"
+      # spot_instance_pools                      = "${lookup(var.worker_groups_launch_template_mixed[count.index], "spot_instance_pools", local.workers_group_defaults["spot_instance_pools"])}"
       spot_max_price                           = "${lookup(var.worker_groups_launch_template_mixed[count.index], "spot_max_price", local.workers_group_defaults["spot_max_price"])}"
     }
 
